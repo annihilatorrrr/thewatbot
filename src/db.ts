@@ -13,7 +13,15 @@ export class Db {
   }
 
   insertWords(words: Omit<Word, "_id">[]) {
-    return WordModel.create(words);
+    return Promise.all(
+      words.map((word) =>
+        WordModel.findOneAndUpdate(
+          { word: word.word, definition: word.definition },
+          { $set: word },
+          { upsert: true, new: true }
+        ).lean()
+      )
+    );
   }
 
   async findWords(query: string) {

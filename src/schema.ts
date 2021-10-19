@@ -5,7 +5,7 @@ const { model, Schema } = mongoose;
 
 const Query = new Schema(
   {
-    query: String,
+    query: { type: String, index: true },
     wordIds: {
       type: [Schema.Types.ObjectId],
     },
