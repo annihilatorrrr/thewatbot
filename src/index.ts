@@ -29,7 +29,7 @@ const db = new Db(mongoose, MONGO_DB);
   )
 );
 
-bot.inlineQuery(/^[\w\s]+$/, async (ctx) => {
+bot.inlineQuery(/^[\w\s'-]+$/, async (ctx) => {
   const userQuery = ctx.update.inline_query.query;
   if (!userQuery) return;
   console.count(userQuery);
