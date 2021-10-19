@@ -35,7 +35,6 @@ export const createNewRecord = async (
   transform: transform,
   userQuery: string
 ) => {
-  console.count(userQuery);
   const result = await fetchWords(userQuery);
   if (!Array.isArray(result)) return null;
   const wordList = transform(result);
