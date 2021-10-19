@@ -63,7 +63,7 @@ export const createTemplate = (words: Word[]): InlineQueryResult[] =>
   words.map((word) => ({
     type: "article",
     id: word._id,
-    title: word.word,
+    title: `${word.word} (${word.partOfSpeech ?? ""})`,
     description: word.definition,
     input_message_content: {
       message_text: createMessage(word),
