@@ -20,8 +20,8 @@ export const transform = (dictionary: APIResponse[]): Omit<Word, "_id">[] =>
         phonetic: page.phonetic,
         origin: page.origin,
         partOfSpeech: definition.partOfSpeech,
-        synonyms: meaning?.synonyms.join(", "),
-        antonyms: meaning?.antonyms.join(", "),
+        synonyms: meaning?.synonyms?.join(", "),
+        antonyms: meaning?.antonyms?.join(", "),
       }))
     )
   );

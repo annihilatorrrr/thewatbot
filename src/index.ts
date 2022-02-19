@@ -20,7 +20,7 @@ const db = new Db(mongoose, MONGO_DB);
       `An Inline English-to-English Dictionary Bot. \nTo use it, type <code>@thewatbot word</code> \nWritten by: @solooo7`,
       {
         parse_mode: "HTML",
-        webpage_preview: false,
+        disable_web_page_preview: true,
         reply_markup: new InlineKeyboard()
           .url("Source", "https://github.com/darvesh/thewatbot")
           .url("Buy me a coffee", "https://buymeacoffee.com/darvesh"),
