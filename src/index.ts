@@ -6,6 +6,7 @@ import {
 	fetchWords,
 	createTemplate,
 	createNewRecord,
+	emptyResult,
 } from "./util.js";
 import { Db } from "./db.js";
 import { BOT_TOKEN, MONGO_DB } from "./config.js";
@@ -31,12 +32,13 @@ const db = new Db(mongoose, MONGO_DB);
 
 bot.inlineQuery(/^[\w\s'-]+$/, async (ctx) => {
 	const userQuery = ctx.update.inline_query.query;
-	if (!userQuery) return;
+	if (!userQuery) return ctx.answerInlineQuery(emptyResult(userQuery));
 	console.count(userQuery);
 	const words =
 		(await db.findWords(userQuery)) ??
 		(await createNewRecord(db, fetchWords, transform, userQuery));
 	if (words?.length) return ctx.answerInlineQuery(createTemplate(words));
+	return ctx.answerInlineQuery(emptyResult(userQuery));
 });
 
 bot.catch(console.error);

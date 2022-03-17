@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import { randomUUID } from "crypto";
 import { InlineKeyboard } from "grammy";
 import { InlineQueryResult } from "@grammyjs/types";
 
@@ -74,3 +75,15 @@ export const createTemplate = (words: Word[]): InlineQueryResult[] =>
 			.row()
 			.switchInlineCurrent("Other definitions", word.word),
 	}));
+
+export const emptyResult = (word: string = ""): InlineQueryResult[] => [
+	{
+		type: "article",
+		id: randomUUID(),
+		title: `No result found`,
+		input_message_content: {
+			message_text: `No definitions found for ${word.toLowerCase()}`,
+			parse_mode: "HTML",
+		},
+	},
+];
