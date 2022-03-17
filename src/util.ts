@@ -1,9 +1,10 @@
 import fetch from "node-fetch";
+import { InlineKeyboard } from "grammy";
+import { InlineQueryResult } from "@grammyjs/types";
 
 import { Db } from "./db.js";
 import { API_URL } from "./config.js";
 import { APIResponse, Word } from "./type.js";
-import { InlineQueryResult } from "@grammyjs/types";
 
 export const fetchWords = (word: string) =>
 	fetch(`${API_URL}/${word}`).then(
@@ -69,4 +70,7 @@ export const createTemplate = (words: Word[]): InlineQueryResult[] =>
 			message_text: createMessage(word),
 			parse_mode: "HTML",
 		},
+		reply_markup: new InlineKeyboard()
+			.row()
+			.switchInlineCurrent("Other definitions", word.word),
 	}));
